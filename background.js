@@ -1,8 +1,17 @@
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener(
+    async (details) => {
 
-    chrome.storage.sync.set({
-        blockedUsers: [],
-        blockedWords: []
-    });
+        if (
+            details.reason !==
+            "install"
+        ) {
+            return;
+        }
 
-});
+        await chrome.storage.local.set({
+            blockedUsers: [],
+            blockedWords: []
+        });
+
+    }
+);
