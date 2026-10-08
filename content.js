@@ -13,7 +13,7 @@ let processTimer = null;
  * Chrome Sync Storageから設定を取得する
  */
 async function loadSettings() {
-  const data = await chrome.storage.sync.get({
+  const data = await chrome.storage.local.get({
     blockedUsers: [],
     blockedWords: [],
   });
@@ -197,7 +197,7 @@ async function blockUser(userName) {
     return;
   }
 
-  const data = await chrome.storage.sync.get({
+  const data = await chrome.storage.local.get({
     blockedUsers: [],
   });
 
@@ -423,10 +423,12 @@ initialize().catch((error) => {
  * 設定画面でユーザーやNGワードが変更された場合、
  * ページをリロードせず即時反映する
  */
-chrome.storage.onChanged.addListener(async (changes, areaName) => {
-  if (areaName !== "sync") {
-    return;
-  }
+chrome.storage.onChanged.addListener(
+    async (changes, areaName) => {
+
+        if (areaName !== "local") {
+            return;
+        }
 
   if (!changes.blockedUsers && !changes.blockedWords) {
     return;
