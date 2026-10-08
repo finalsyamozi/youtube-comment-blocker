@@ -1,6 +1,6 @@
 async function loadData() {
 
-    const data = await chrome.storage.sync.get({
+    const data = await chrome.storage.local.get({
         blockedUsers: [],
         blockedWords: [],
         darkMode: false
@@ -108,7 +108,7 @@ async function addUser() {
     }
 
     const data =
-        await chrome.storage.sync.get({
+        await chrome.storage.local.get({
             blockedUsers: []
         });
 
@@ -119,7 +119,7 @@ async function addUser() {
         ])
     ];
 
-    await chrome.storage.sync.set({
+    await chrome.storage.local.set({
         blockedUsers: users
     });
 
@@ -139,7 +139,7 @@ async function addWord() {
     }
 
     const data =
-        await chrome.storage.sync.get({
+        await chrome.storage.local.get({
             blockedWords: []
         });
 
@@ -150,7 +150,7 @@ async function addWord() {
         ])
     ];
 
-    await chrome.storage.sync.set({
+    await chrome.storage.local.set({
         blockedWords: words
     });
 
@@ -160,11 +160,11 @@ async function addWord() {
 async function removeUser(user) {
 
     const data =
-        await chrome.storage.sync.get({
+        await chrome.storage.local.get({
             blockedUsers: []
         });
 
-    await chrome.storage.sync.set({
+    await chrome.storage.local.set({
         blockedUsers:
             data.blockedUsers.filter(
                 x => x !== user
@@ -175,11 +175,11 @@ async function removeUser(user) {
 async function removeWord(word) {
 
     const data =
-        await chrome.storage.sync.get({
+        await chrome.storage.local.get({
             blockedWords: []
         });
 
-    await chrome.storage.sync.set({
+    await chrome.storage.local.set({
         blockedWords:
             data.blockedWords.filter(
                 x => x !== word
@@ -190,7 +190,7 @@ async function removeWord(word) {
 async function exportCsv() {
 
     const data =
-        await chrome.storage.sync.get({
+        await chrome.storage.local.get({
             blockedUsers: [],
             blockedWords: []
         });
@@ -307,7 +307,7 @@ async function importCsv(event) {
 
     });
 
-    await chrome.storage.sync.set({
+    await chrome.storage.local.set({
         blockedUsers:
             [...new Set(blockedUsers)],
         blockedWords:
@@ -404,7 +404,7 @@ if (darkMode) {
                 event.target.checked
             );
 
-            await chrome.storage.sync.set({
+            await chrome.storage.local.set({
                 darkMode:
                     event.target.checked
             });
@@ -415,8 +415,12 @@ if (darkMode) {
 }
 
 chrome.storage.onChanged.addListener(
-    () => {
-        loadData();
+    (_, areaName) => {
+
+        if (areaName === "local") {
+            loadData();
+        }
+
     }
 );
 
