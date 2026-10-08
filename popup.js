@@ -1,7 +1,7 @@
 async function initialize() {
 
     const data =
-        await chrome.storage.sync.get({
+        await chrome.storage.local.get({
             darkMode: false
         });
 
@@ -27,7 +27,7 @@ async function addUser() {
     }
 
     const data =
-        await chrome.storage.sync.get({
+        await chrome.storage.local.get({
             blockedUsers: []
         });
 
@@ -38,7 +38,7 @@ async function addUser() {
         ])
     ];
 
-    await chrome.storage.sync.set({
+    await chrome.storage.local.set({
         blockedUsers: users
     });
 
@@ -61,7 +61,7 @@ async function addWord() {
     }
 
     const data =
-        await chrome.storage.sync.get({
+        await chrome.storage.local.get({
             blockedWords: []
         });
 
@@ -72,7 +72,7 @@ async function addWord() {
         ])
     ];
 
-    await chrome.storage.sync.set({
+    await chrome.storage.local.set({
         blockedWords: words
     });
 
