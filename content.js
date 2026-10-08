@@ -209,7 +209,7 @@ async function blockUser(userName) {
   if (!alreadyBlocked) {
     blockedUsers.push(normalizedName);
 
-    await chrome.storage.sync.set({
+    await chrome.storage.local.set({
       blockedUsers,
     });
   }
