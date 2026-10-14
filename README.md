@@ -1,6 +1,6 @@
 # YouTube Comment Blocker
 
-YouTubeのコメント・返信・ライブチャットを、ユーザー名やNGワードで非表示にできる Chrome 拡張機能です。
+YouTubeのコメントを、ユーザー名やNGワードで非表示にできる Chrome 拡張機能です。
 
 ## 主な機能
 
