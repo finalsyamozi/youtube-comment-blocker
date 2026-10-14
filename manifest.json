@@ -3,7 +3,7 @@
   "name": "YouTube Comment Blocker",
   "short_name": "YT Blocker",
   "version": "1.0.0",
-  "description": "YouTubeのコメント・返信・ライブチャットをユーザー名やNGワードで非表示にします。",
+  "description": "YouTubeのコメントをユーザー名やNGワードで非表示にします。",
 
   "icons": {
     "16": "icons/16.png",
