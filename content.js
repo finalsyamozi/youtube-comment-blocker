@@ -290,7 +290,8 @@ function processNormalComments() {
         return;
       }
 
-      showElement(hideTarget);
+        showElement(hideTarget);
+
       addBlockButton(comment, authorName);
     } catch (error) {
       console.warn("コメントの解析に失敗しました。", error);
@@ -423,12 +424,10 @@ initialize().catch((error) => {
  * 設定画面でユーザーやNGワードが変更された場合、
  * ページをリロードせず即時反映する
  */
-chrome.storage.onChanged.addListener(
-    async (changes, areaName) => {
-
-        if (areaName !== "local") {
-            return;
-        }
+chrome.storage.onChanged.addListener(async (changes, areaName) => {
+  if (areaName !== "local") {
+    return;
+  }
 
   if (!changes.blockedUsers && !changes.blockedWords) {
     return;
