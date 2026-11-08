@@ -168,7 +168,7 @@ chrome.storage.onChanged.addListener(
     ) => {
 
         if (
-            areaName === "sync" &&
+            areaName === "local" &&
             changes.darkMode
         ) {
 
@@ -178,3 +178,4 @@ chrome.storage.onChanged.addListener(
 
     }
 );
+
